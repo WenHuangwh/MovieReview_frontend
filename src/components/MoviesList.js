@@ -2,9 +2,7 @@ import React, {useState, useEffect, useCallback} from "react";
 import MovieDataService from "../services/movies";
 import { Link } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
-import { Button } from "react-bootstrap/Button";
-// import Button from "react-bootstrap/Button"; // Modified
-
+import Button from "react-bootstrap/Button";
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
@@ -61,7 +59,7 @@ const MoviesList = props => {
 
     const findByTitle = useCallback(() => {
         setCurrentSearchMode("findByTitle");
-        find(searchTitle, "little");
+        find(searchTitle, "title");
     }, [find, searchTitle]);
 
     const findByRating = useCallback(() => {
@@ -165,7 +163,13 @@ const MoviesList = props => {
                                 <Card className="moviesListCard">
                                     <Card.Img
                                     className="smallPoster"
-                                    src={movie.poster+"/100px180"} />
+                                    src={movie.poster+"/100px180"} 
+                                    onError={({ currentTarget }) => {
+                                        currentTarget.onerror = null;
+                                        currentTarget.src="/images/NoPosterAvailable-crop.jpg";
+                                        currentTarget.style="width: 100%; height: 180";
+                                      }}
+                                    />
                                     <Card.Body>
                                         <Card.Title>{movie.title}</Card.Title>
                                         <Card.Text>

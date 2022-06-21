@@ -1,6 +1,7 @@
 import axios from "axios";
 
 class MovieDataService {
+
     getAll(page = 0) {
         return axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/v1/movies?page=${page}`);
     }

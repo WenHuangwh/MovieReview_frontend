@@ -1,9 +1,75 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import MovieDataService from '../services/movies';
+import { useParams } from 'react-router-dom';
+import Card from 'react-bootstrap/Card';
+import Container from "react-bootstrap/esm/Container";
+import Image from 'react-bootstrap/Image';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+
+import "./Movie.css"
+
 
 const Movie = props => {
+
+    let params = useParams();
+
+    const [movie, setMovie] = useState({
+        id: null,
+        title: "",
+        rated: "",
+        reviews: []
+    });
+
+    useEffect(() => {
+        const getMovie = id => {
+            // Todo:
+            // Implement getMovie
+        }
+        getMovie(params.id)
+    }, [params.id]);
+
     return (
-        <div className = "App" >
-        Placeholder text for Movie 
+        <div>
+            <Container>
+                <Row>
+                    <Col>
+                    <div className="poster">
+                        <Image
+                        className="bigPicture"
+                        src={movie.poster+"/100px250"}
+                        onError={({ currentTarget }) => {
+                            currentTarget.onerror = null;
+                            currentTarget.src="/images/NoPosterAvailable-crop.jpg";
+                            currentTarget.style="width: 100%; height: 250";
+                          }}
+                        fluid />
+                    </div>
+                    </Col>
+                    <Col>
+                        <Card>
+                            <Card.Header as="h2">{movie.title}</Card.Header>
+                            <Card.Body>
+                                <Card.Text>
+                                    {movie.plot}
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                        <h2>Reviews</h2>
+                        <br></br>
+                        { movie.reviews.map((review, index) => {
+                            return (
+                                <div className="d-flex">
+                                    <div className="flex-shrink-0 reviewsText">
+                                        <h5>{review.name + " reviewed on "}</h5>
+                                        <p className="review">{review.review}</p>
+                                    </div>
+                                </div>
+                            )
+                        })}
+                    </Col>
+                </Row>
+            </Container>
         </div>
     )
 }
