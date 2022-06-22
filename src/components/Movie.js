@@ -25,6 +25,13 @@ const Movie = props => {
         const getMovie = id => {
             // Todo:
             // Implement getMovie
+            MovieDataService.getMovieById(id)
+                .then(response => {
+                    setMovie(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+            })
         }
         getMovie(params.id)
     }, [params.id]);

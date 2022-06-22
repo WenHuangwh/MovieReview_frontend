@@ -16,6 +16,10 @@ class MovieDataService {
         return axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/v1/movies/ratings`);
     }
 
+    getMovieById(id) {
+        return axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/v1/movies/id/${id}`);
+    }
+
 }
 
 export default new MovieDataService();
