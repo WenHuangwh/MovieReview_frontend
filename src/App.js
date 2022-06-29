@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import Logout from "./components/Logout";
 import MoviesList from "./components/MoviesList";
 import Movie from "./components/Movie";
+import AddReview from "./components/AddReview";
 import './App.css';
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
@@ -66,7 +67,11 @@ function App() {
         <MoviesList />}
         />
         <Route path={"/movies/:id/"} element={
-          <Movie />
+          <Movie user={user}/>
+        }
+        />
+        <Route path={"/movies/:id/review"} element={
+          <AddReview user={user}/>
         }
         />
       </Routes>
