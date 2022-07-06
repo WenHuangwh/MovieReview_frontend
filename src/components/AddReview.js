@@ -8,13 +8,9 @@ import Container from "react-bootstrap/Container";
 const AddReview = ({ user }) => {
     const navigate = useNavigate();
     let params = useParams();
-
     let editing = false;
     let initialReviewState = "";
-    //
-    //
     let location = useLocation();
-    
 
     const [review, setReview] = useState(initialReviewState);
 
@@ -33,9 +29,9 @@ const AddReview = ({ user }) => {
 
         if (location.state && data.movie_id === location.state.currentReview.movie_id &&
             data.user_id === location.state.currentReview.user_id) {
-                editing = true;
-                data.review_id = location.state.currentReview._id;
-            }
+            editing = true;
+            data.review_id = location.state.currentReview._id;
+        }
 
         if (editing) {
             // Todo: Handle case where an existing
@@ -58,25 +54,28 @@ const AddReview = ({ user }) => {
         }
     }
 
-    return (
-        <Container className="main_container">
-            <Form>
-                <Form.Group>
-                    <Form.Label>{ editing ? "Edit" : "Create"} Review</Form.Label>
-                    <Form.Control
-                        as="textarea"
-                        type="text"
-                        required
-                        review={ review }
-                        onChange = { onChangeReview }
-                        defaultValue={ editing ? null : "" }
-                    />
-                </Form.Group>
-                <Button variant="primary" onClick={ saveReview }>
-                    Submit
-                </Button>
-            </Form>
-        </Container>
+    return ( <
+        Container className = "main_container" >
+        <
+        Form >
+        <
+        Form.Group >
+        <
+        Form.Label > { editing ? "Edit" : "Create" }
+        Review < /Form.Label> <
+        Form.Control as = "textarea"
+        type = "text"
+        required review = { review }
+        onChange = { onChangeReview }
+        defaultValue = { editing ? null : "" }
+        /> <
+        /Form.Group> <
+        Button variant = "primary"
+        onClick = { saveReview } >
+        Submit <
+        /Button> <
+        /Form> <
+        /Container>
     )
 }
 

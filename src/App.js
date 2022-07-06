@@ -1,5 +1,5 @@
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import React from 'react';
 import { Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -12,12 +12,22 @@ import MoviesList from "./components/MoviesList";
 import Movie from "./components/Movie";
 import AddReview from "./components/AddReview";
 import './App.css';
+import FavoritesDataService from "./services/favorites";
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 function App() {
 
   const [user, setUser] = useState(null);
+  const [favorites, setFavorites] = useState([]);
+
+  const addFavorite = (movieId) => {
+    setFavorites([...favorites, movieId])
+  }
+
+  const deleteFavorite = (movieId) => {
+    setFavorites(favorites.filter(f => f !== movieId));
+  }
 
   useEffect(() => {
     let loginData = JSON.parse(localStorage.getItem("login"));
@@ -33,7 +43,43 @@ function App() {
       }
     }
   }, []);
-  
+
+  const updateFavorite = useCallback(() => {
+    if (!user) {
+      return;
+    }
+    const data = {_id: user.googleId, favorites: favorites};
+    FavoritesDataService.updateFavorites(data)
+    .then(response => {
+        console.log('Update favorites');
+    })
+    .catch(e => {
+        console.log(e);
+    })
+  }, [favorites]);
+
+  useEffect(() => {
+    updateFavorite();
+  }, [updateFavorite]);
+
+  const getFavorite = useCallback(() => {
+    if (!user) {
+      return;
+    }
+    FavoritesDataService.getFavorites(user.googleId)
+    .then(response => {
+      setFavorites([...response.data.favorites])
+    })
+    .catch(e => {
+        console.log(e);
+    })
+  }, [user]);
+
+  useEffect(() => {
+    getFavorite();
+  }, [getFavorite]);
+
+
   return (
     <GoogleOAuthProvider clientId={clientId}>
     <div className="App">
@@ -61,10 +107,20 @@ function App() {
 
       <Routes>
         <Route exact path={"/"} element={
-        <MoviesList />}
+        <MoviesList
+          user = {user}
+          addFavorite = {addFavorite}
+          deleteFavorite = {deleteFavorite}
+          favorites = {favorites}
+        />}
         />
         <Route exact path={"/movies"} element={
-        <MoviesList />}
+        <MoviesList 
+          user={user}
+          addFavorite={addFavorite}
+          deleteFavorite={deleteFavorite}
+          favorites={favorites}
+        />}
         />
         <Route path={"/movies/:id/"} element={
           <Movie user={user}/>
