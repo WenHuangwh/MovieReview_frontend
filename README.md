@@ -23,4 +23,7 @@ HW6:
 
 <img width="1728" alt="image" src="https://media.github.ccs.neu.edu/user/9360/files/ef171c19-22f5-4e57-898b-7c942acf6ae3">
 
+<img width="1432" alt="image" src="https://media.github.ccs.neu.edu/user/9360/files/8ec4c88a-d7ab-44f2-94da-1991bd00b229">
+
+
 
