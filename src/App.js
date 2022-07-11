@@ -20,8 +20,45 @@ function App() {
 
   const [user, setUser] = useState(null);
   const [favorites, setFavorites] = useState([]);
+  const [doSaveFaves, setDoSaveFaves] = useState(false);
+
+  const retrieveFavorites = useCallback(() => {
+    FavoritesDataService.getAll(user.googleId)
+    .then(response => {
+      setFavorites(response.data.favorites);
+    })
+    .catch(e => {
+      console.log(e);
+    });
+  }, [user]);
+
+  const saveFavorites = useCallback(() => {
+    var data = {
+      _id: user.googleId,
+      favorites: favorites
+    }
+
+    FavoritesDataService.updateFavorites(data)
+    .catch(e => {
+      console.log(e);
+    })
+  }, [favorites, user]);
+
+  useEffect(() => {
+    if (user && doSaveFaves) {
+      saveFavorites();
+      setDoSaveFaves(false);
+    }
+  }, [user, favorites, saveFavorites, doSaveFaves]);
+
+  useEffect(() => {
+    if (user) {
+      retrieveFavorites();
+    }
+  }, [user, retrieveFavorites]);
 
   const addFavorite = (movieId) => {
+    setDoSaveFaves(true);
     setFavorites([...favorites, movieId])
   }
 
@@ -44,40 +81,40 @@ function App() {
     }
   }, []);
 
-  const updateFavorite = useCallback(() => {
-    if (!user) {
-      return;
-    }
-    const data = {_id: user.googleId, favorites: favorites};
-    FavoritesDataService.updateFavorites(data)
-    .then(response => {
-        console.log('Update favorites');
-    })
-    .catch(e => {
-        console.log(e);
-    })
-  }, [favorites]);
+  // const updateFavorite = useCallback(() => {
+  //   if (!user) {
+  //     return;
+  //   }
+  //   const data = {_id: user.googleId, favorites: favorites};
+  //   FavoritesDataService.updateFavorites(data)
+  //   .then(response => {
+  //       console.log('Update favorites');
+  //   })
+  //   .catch(e => {
+  //       console.log(e);
+  //   })
+  // }, [favorites]);
 
-  useEffect(() => {
-    updateFavorite();
-  }, [updateFavorite]);
+  // useEffect(() => {
+  //   updateFavorite();
+  // }, [updateFavorite]);
 
-  const getFavorite = useCallback(() => {
-    if (!user) {
-      return;
-    }
-    FavoritesDataService.getFavorites(user.googleId)
-    .then(response => {
-      setFavorites([...response.data.favorites])
-    })
-    .catch(e => {
-        console.log(e);
-    })
-  }, [user]);
+  // const getFavorite = useCallback(() => {
+  //   if (!user) {
+  //     return;
+  //   }
+  //   FavoritesDataService.getFavorites(user.googleId)
+  //   .then(response => {
+  //     setFavorites([...response.data.favorites])
+  //   })
+  //   .catch(e => {
+  //       console.log(e);
+  //   })
+  // }, [user]);
 
-  useEffect(() => {
-    getFavorite();
-  }, [getFavorite]);
+  // useEffect(() => {
+  //   getFavorite();
+  // }, [getFavorite]);
 
 
   return (
