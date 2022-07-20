@@ -81,42 +81,6 @@ function App() {
     }
   }, []);
 
-  // const updateFavorite = useCallback(() => {
-  //   if (!user) {
-  //     return;
-  //   }
-  //   const data = {_id: user.googleId, favorites: favorites};
-  //   FavoritesDataService.updateFavorites(data)
-  //   .then(response => {
-  //       console.log('Update favorites');
-  //   })
-  //   .catch(e => {
-  //       console.log(e);
-  //   })
-  // }, [favorites]);
-
-  // useEffect(() => {
-  //   updateFavorite();
-  // }, [updateFavorite]);
-
-  // const getFavorite = useCallback(() => {
-  //   if (!user) {
-  //     return;
-  //   }
-  //   FavoritesDataService.getFavorites(user.googleId)
-  //   .then(response => {
-  //     setFavorites([...response.data.favorites])
-  //   })
-  //   .catch(e => {
-  //       console.log(e);
-  //   })
-  // }, [user]);
-
-  // useEffect(() => {
-  //   getFavorite();
-  // }, [getFavorite]);
-
-
   return (
     <GoogleOAuthProvider clientId={clientId}>
     <div className="App">
@@ -132,6 +96,11 @@ function App() {
               <Nav.Link as={Link} to={"/movies"}>
                 Movies
               </Nav.Link>
+              {user? null :
+              (<Nav.Link as={Link} to={"/favorites"}>
+                Favorites
+              </Nav.Link>)
+              }
             </Nav>
           </Navbar.Collapse>
           { user ? (
