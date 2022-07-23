@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import Logout from "./components/Logout";
 import MoviesList from "./components/MoviesList";
 import Movie from "./components/Movie";
+import MyFavorites from './components/MyFavorites';
 import AddReview from "./components/AddReview";
 import './App.css';
 import FavoritesDataService from "./services/favorites";
@@ -96,10 +97,11 @@ function App() {
               <Nav.Link as={Link} to={"/movies"}>
                 Movies
               </Nav.Link>
-              {user? null :
-              (<Nav.Link as={Link} to={"/favorites"}>
+              {user? (
+              <Nav.Link as={Link} to={"/favorites"}>
                 Favorites
-              </Nav.Link>)
+              </Nav.Link>
+              ) : null
               }
             </Nav>
           </Navbar.Collapse>
@@ -130,6 +132,10 @@ function App() {
         />
         <Route path={"/movies/:id/"} element={
           <Movie user={user}/>
+        }
+        />
+        <Route path={"/favorites"} element={
+          <MyFavorites user={user}/>
         }
         />
         <Route path={"/movies/:id/review"} element={

@@ -116,6 +116,8 @@ const MoviesList = ({
 
     return(
         <div className="App">
+            {console.log(movies)}
+            {console.log(favorites)}
             <Container className="main-container">
                 <Form>
                     <Row>
