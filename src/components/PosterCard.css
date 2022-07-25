@@ -1,0 +1,11 @@
+div.poster {
+    /* margin-top: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row; */
+    background-color: white;
+    border: 1px dashed gray;
+    padding: 0.5rem 1rem;
+    margin-Bottom: .5rem;
+    cursor: move
+}

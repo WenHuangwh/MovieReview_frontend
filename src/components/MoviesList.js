@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import MovieDataService from "../services/movies";
 import { Link } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
@@ -47,10 +47,10 @@ const MoviesList = ({
                 setMovies(response.data.movies);
                 setCurrentPage(response.data.page);
                 setEntriesPerPage(response.data.entries_per_page);
-        })
-        .catch(e => {
-            console.log(e);
-        });
+            })
+            .catch(e => {
+                console.log(e);
+            });
     }, [currentPage]);
 
     const find = useCallback((query, by) => {
@@ -114,79 +114,79 @@ const MoviesList = ({
         setSearchRating(searchRating);
     }
 
-    return(
+    return (
         <div className="App">
-            {console.log(movies)}
+            {/* {console.log(movies)} */}
             {console.log(favorites)}
             <Container className="main-container">
                 <Form>
                     <Row>
                         <Col>
-                        <Form.Group className="mb-3">
-                            <Form.Control
-                            type="text"
-                            placeholder="Search by title"
-                            value={searchTitle}
-                            onChange={onChangeSearchTitle}
-                            />
-                        </Form.Group>
-                        <Button
-                        variant="primary"
-                        type="button"
-                        onClick={findByTitle}
-                        >
-                            Search
-                        </Button>
+                            <Form.Group className="mb-3">
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Search by title"
+                                    value={searchTitle}
+                                    onChange={onChangeSearchTitle}
+                                />
+                            </Form.Group>
+                            <Button
+                                variant="primary"
+                                type="button"
+                                onClick={findByTitle}
+                            >
+                                Search
+                            </Button>
                         </Col>
                         <Col>
-                        <Form.Group className="mb-3">
-                            <Form.Control
-                            as="select"
-                            onChange={onChangeSearchRating}
+                            <Form.Group className="mb-3">
+                                <Form.Control
+                                    as="select"
+                                    onChange={onChangeSearchRating}
+                                >
+                                    {ratings.map((rating, i) => {
+                                        return (
+                                            <option value={rating}
+                                                key={i}>
+                                                {rating}
+                                            </option>
+                                        )
+                                    })}
+                                </Form.Control>
+                            </Form.Group>
+                            <Button
+                                variant="primary"
+                                type="button"
+                                onClick={findByRating}
                             >
-                                {ratings.map((rating, i) => {
-                                    return (
-                                        <option value={rating}
-                                        key={i}>
-                                            {rating}
-                                        </option>
-                                    )
-                                })}
-                            </Form.Control>
-                        </Form.Group>
-                        <Button
-                        variant="primary"
-                        type="button"
-                        onClick={findByRating}
-                        >
-                            Search
-                        </Button>
+                                Search
+                            </Button>
                         </Col>
                     </Row>
                 </Form>
                 <Row className="movieRow">
                     {movies.map((movie) => {
-                        return(
+                        return (
                             <Col key={movie._id}>
                                 <Card className="moviesListCard">
                                     {user && (
-                                        favorites.includes(movie._id) ? 
-                                        <BsStarFill className="star starFill" onClick = {() => {
-                                            deleteFavorite(movie._id);
-                                        }}/>
-                                        :
-                                        <BsStar className="star starEmpty" onClick={() =>{
-                                            addFavorite(movie._id);
-                                        }}/>
+                                        favorites.includes(movie._id) ?
+                                            <BsStarFill className="star starFill" onClick={() => {
+                                                deleteFavorite(movie._id);
+                                            }} />
+                                            :
+                                            <BsStar className="star starEmpty" onClick={() => {
+                                                addFavorite(movie._id);
+                                            }} />
                                     )}
                                     <Card.Img
-                                    className="smallPoster"
-                                    src={movie.poster+"/100px180"} 
-                                    onError={({ currentTarget }) => {
-                                        currentTarget.onerror = null;
-                                        currentTarget.src="/images/NoPosterAvailable-crop.jpg";
-                                        currentTarget.style="width: 100%; height: 180";
-                                      }}
+                                        className="smallPoster"
+                                        src={movie.poster + "/100px180"}
+                                        onError={({ currentTarget }) => {
+                                            currentTarget.onerror = null;
+                                            currentTarget.src = "/images/NoPosterAvailable-crop.jpg";
+                                            currentTarget.style = "width: 100%; height: 180";
+                                        }}
                                     />
                                     <Card.Body>
                                         <Card.Title>{movie.title}</Card.Title>
@@ -196,7 +196,7 @@ const MoviesList = ({
                                         <Card.Text>
                                             {movie.plot}
                                         </Card.Text>
-                                        <Link to={"/movies/"+movie._id}>
+                                        <Link to={"/movies/" + movie._id}>
                                             View Reviews
                                         </Link>
                                     </Card.Body>
@@ -206,10 +206,10 @@ const MoviesList = ({
                     })}
                 </Row>
                 <br />
-                Showing page:{ currentPage + 1}.
+                Showing page:{currentPage + 1}.
                 <Button
-                variant="link"
-                onClick={() => {setCurrentPage(currentPage + 1)}}
+                    variant="link"
+                    onClick={() => { setCurrentPage(currentPage + 1) }}
                 >
                     Get next {entriesPerPage} results
                 </Button>
