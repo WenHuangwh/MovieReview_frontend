@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import MovieDataService from '../services/movies';
 import React, { useState, useEffect } from "react";
+import Badge from 'react-bootstrap/Badge';
 // import "./PosterCard.css"
 
 const ItemTypes = {
@@ -91,27 +92,26 @@ export const PosterCard = ({ id, index, moveCard }) => {
   return (
     <div className='posteCard' ref={ref} style={{ ...cardStyle, opacity }} data-handler-id={handlerId}>
       {getMovie(id)}
-      <Row>
         <Card className="posterImg" style={{ posterStyle }} >
+        <Badge pill bg="warning">
+        {index}
+      </Badge>{' '}
           <Card.Img
             variant="left"
             src={img + "/100px180"}
             height='100%'
-            width='30%'
+            width='20%'
             title={title}
             onError={({ currentTarget }) => {
               currentTarget.onerror = null;
               currentTarget.src = "/images/NoPosterAvailable-crop.jpg";
-              currentTarget.style = "width: 100%; height: 100%";
+              currentTarget.style = "width: 20%; height: 100%";
             }}
           />
         </Card>
-      </Row>
-      <Row>
         <Card.Title>
           {title}
         </Card.Title>
-      </Row>
     </div>
   )
 }
