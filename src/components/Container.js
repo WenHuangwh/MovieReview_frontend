@@ -2,13 +2,7 @@ import update from 'immutability-helper'
 import { PosterCard } from './PosterCard.js'
 import { useState, useEffect, useCallback } from "react";
 import FavoritesDataService from "../services/favorites";
-// import "./Container.css"
-
-const style = {
-    width: 500,
-    marginLeft: 'auto',
-    marginRight: 'auto'
-}
+import "./MyFavorites.css";
 
 const Container = (user) => {
 
@@ -62,7 +56,7 @@ const Container = (user) => {
             for (let i = 0; i < posters.length; i++){
                 sortedMyfav.push(posters[i].id);
             }
-            if (sortedMyfav.length == 0) {
+            if (sortedMyfav.length === 0) {
                 return;
             }
             console.log(sortedMyfav);
@@ -94,7 +88,7 @@ const Container = (user) => {
         }, [])
         return (
             <>
-                <div className='container' style={style}>{posters.map((card, i) => renderPoster(card, i))}</div>
+                <div className='container' >{posters.map((card, i) => renderPoster(card, i))}</div>
             </>
         )
     }

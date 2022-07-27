@@ -1,0 +1,87 @@
+.posterDiv {
+    width: 40%;
+    height: 120px;
+    margin-left: 35%;
+    margin-top: 10px;
+    background-color: white;
+    border: 0ch;
+    border: none;
+}
+
+.left {
+    width: 50%;
+    border: none;
+}
+
+.right {
+    width: 50%;
+    margin-left: 50%;
+    border: none;
+}
+
+.posterCard {
+    margin-top: 0;
+    width: auto;
+    height: 100%;
+    display: block;
+    flex-direction: column;
+    border: none;
+}
+
+.posterImg {
+    width: 400px;
+    height: 110px;
+    margin-left: 100px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    position: absolute;
+    object-fit: cover;
+}
+
+.posterText {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 25%;
+    text-align: left;
+    align-content: center;
+    width: 100%;
+    font-size: 2em;
+    vertical-align: middle;
+    display: inline;
+    vertical-align: middle;
+    max-height: 100px;
+    overflow: hidden;
+    font-family: "Times New Roman", Times, serif;
+    border: none;
+}
+
+.posterNum {
+    width: 400px;
+    height: 110px;
+    margin-left: 2px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    position: absolute;
+}
+
+.container {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-Left: auto;
+    margin-Right: auto;
+    display: flex-root;
+    border: none;
+}
+
+.fav {
+    height: 100%;
+    width: 100%;
+    margin-top: auto;
+}
+
+.favTitle {
+    margin-left: 13%;
+    width: 20%;
+    margin-top: auto;
+    position: absolute;
+}
