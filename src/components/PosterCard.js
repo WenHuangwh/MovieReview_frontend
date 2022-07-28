@@ -79,10 +79,10 @@ export const PosterCard = ({ id, index, moveCard }) => {
     <div className='myfavPoster' ref={ref} style={{ opacity }} data-handler-id={handlerId}>
       {getMovie(id)}
       <Card className="myfavPosterCard">
-        {index < 10? 
-        <Card.Text className='myfavCardIndexOneDigit'>{index}</Card.Text>
+        {index + 1 < 10? 
+        <Card.Text className='myfavCardIndexOneDigit'>{index + 1}</Card.Text>
          : 
-        <Card.Text className='myfavCardIndexTwoDigit'>{index}</Card.Text>}
+        <Card.Text className='myfavCardIndexTwoDigit'>{index + 1}</Card.Text>}
         
         <Card.Img className='myfavCardImg'
           src={img + "/100px180"}
