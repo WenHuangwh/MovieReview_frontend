@@ -8,9 +8,9 @@ import "./MyFavorites.css";
 const MyFavorites = ({ user }) => {
 
     return (
-        <div >
-            <div className="favTitle"><h2 >Drag your favorites to rank them</h2></div>
-            <div className="fav">
+        <div className="myfavContainer">
+            <div className="myfavPanel"><h2 >Drag your favorites to rank them</h2></div>
+            <div className='myfavCardContainer'>
             <DndProvider backend={HTML5Backend}>
                 <Container
                 user = {user}

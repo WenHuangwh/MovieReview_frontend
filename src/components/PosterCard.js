@@ -75,37 +75,27 @@ export const PosterCard = ({ id, index, moveCard }) => {
   drag(drop(ref))
 
   return (
-    <div className='posterDiv' ref={ref} style={{ opacity }} data-handler-id={handlerId}>
+    
+    <div className='myfavPoster' ref={ref} style={{ opacity }} data-handler-id={handlerId}>
       {getMovie(id)}
-      <Col className='left'>
-        <Card className="posterCard">
-        <Col className='posterNum'>
-        <Badge pill bg="warning">
-          {index}
-        </Badge>{' '}
-        </Col>
-        <Col className='posterImg'>
-        <Card.Img
-          variant="left"
+      <Card className="myfavPosterCard">
+        {index < 10? 
+        <Card.Text className='myfavCardIndexOneDigit'>{index}</Card.Text>
+         : 
+        <Card.Text className='myfavCardIndexTwoDigit'>{index}</Card.Text>}
+        
+        <Card.Img className='myfavCardImg'
           src={img + "/100px180"}
-          height='100%'
-          width='20%'
           title={title}
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;
             currentTarget.src = "/images/NoPosterAvailable-crop.jpg";
-            currentTarget.style = "width: 20%; height: 100%";
           }}
-        /></Col>
+        />
+        <Card.Title className='myfavCardText'>
+          {title}
+        </Card.Title>
       </Card>
-      </Col>
-      <Col className='right'>
-      <Card className='posterText'>
-      <Card.Title>
-        {title}
-      </Card.Title>
-      </Card>
-      </Col>
     </div>
   )
 }
