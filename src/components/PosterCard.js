@@ -1,11 +1,8 @@
 import { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 import MovieDataService from '../services/movies';
-import React, { useState, useEffect } from "react";
-import Badge from 'react-bootstrap/Badge';
+import React, { useState } from "react";
 import "./MyFavorites.css";
 
 const ItemTypes = {

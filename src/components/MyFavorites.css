@@ -72,8 +72,8 @@
 }
 
 .myfavPanel {
-    margin-left: 12%;
-    width: 25%;
+    text-align: center;
+    width: 33%;
     min-height: 100vh;
     padding: 1rem;
     font-size: 2em;

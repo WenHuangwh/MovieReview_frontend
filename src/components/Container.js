@@ -2,8 +2,6 @@ import update from 'immutability-helper'
 import { PosterCard } from './PosterCard.js'
 import { useState, useEffect, useCallback } from "react";
 import FavoritesDataService from "../services/favorites";
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 import "./MyFavorites.css";
 
 const Container = (user) => {
@@ -90,7 +88,7 @@ const Container = (user) => {
         }, [])
         return (
             <>
-                <div>{posters.map((card, i) => renderPoster(card, i))}</div>
+                {posters.map((card, i) => renderPoster(card, i))}
             </>
         )
     }
